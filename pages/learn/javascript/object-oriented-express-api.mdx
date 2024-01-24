@@ -1,0 +1,84 @@
+# Object Oriented Express API
+
+import { Callout, Card, Cards, Steps } from "nextra/components";
+
+-   Trong Express 5, hiện là phiên bản beta, chúng ta không cần phải đưa ra lỗi một cách rõ ràng. Nó sẽ tự đưa ra lỗi và gọi hàm next() và kèm theo lỗi, do đó, nếu không còn cái này thì có cái kia trong trình xử lý.
+-   Bạn có thể sử dụng toàn bộ lớp javascript làm trình xử lý router.
+
+<Callout>
+    Bây giờ với sự trợ giúp của hai giải pháp tên, cách xử lý trông giống như
+    thế này.
+</Callout>
+
+```js filename="book.controller.js"
+var express = require("express");
+var router = express.Router();
+
+const Book = require("../models/Book");
+const books = require("../caches/book.cache");
+const Base = require("./base.controller");
+
+class BookController extends Base {
+    constructor(model) {
+        super();
+        this.model = model;
+
+        // Tất cả các routes sẽ được khai báo tại đây!
+        router.get("/", books.cache, this.index);
+        router.get("/:id", books.cache, this.get);
+        router.post("/", this.create);
+    }
+}
+
+new BookController(Book);
+
+module.exports = router;
+```
+
+Bạn có thể sử dụng điều này trong các routes của mình như thế này:
+
+```js filename=router.js
+var booksRouter = require("../controllers/book.controller");
+
+module.exports = function (app) {
+    app.use("/books", booksRouter);
+};
+```
+
+Thế này chẳng phải gọn gàng và sạch sẽ sao? Như bạn có thể thấy, chúng ta đã import Model và cache mà chúng đã triển khai cho việc này. Nếu nhìn kỹ, chúng ta sẽ nhận ra nó hoạt động như thế nào. Đó là phần tốt nhất. Tôi đã triển khai base controller có thể mở rộng cho mọi controllers và họ có thể sử dụng các phương thức được xác định trong base controller để triển khai basic crud.
+
+Base controller trông giống như thế này:
+
+```js filename=base.controller.js
+class Base {
+    constructor() {}
+
+    index = async (req, res, next) => {
+        const resources = await this.model.find({});
+        return res.status(200).json(this.apiSend(resources));
+    };
+
+    get = async (req, res, next) => {
+        const resource = await this.model
+            .findById(req.params.id)
+            .orFail(new NotFoundError());
+        return res.status(200).json(this.apiSend(resource));
+    };
+
+    create = async (req, res) => {
+        const { ...body } = req.body;
+        const resource = await this.model.create(body);
+        return res.status(200).json(this.apiSend(resource));
+    };
+
+    apiSend = (json) => {
+        return {
+            data: json,
+        };
+    };
+}
+
+module.exports = Base;
+```
+
+Bây giờ chúng ta thấy, không có gì cụ thể cho bất kỳ model hoặc controller nào. Nếu phương thức create cần một chút thao tác thay đổi, chúng ta có thể triển khai phương thức đó trong controller mới của mình bằng cách sử dụng module dịch vụ dành riêng cho controller hoặc model.
