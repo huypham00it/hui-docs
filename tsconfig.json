@@ -20,7 +20,8 @@
         "**/*.ts",
         "**/*.tsx",
         "next.config.js",
-        "tailwind.config.js"
+        "tailwind.config.js",
+        "postcss.config.js"
     ],
     "exclude": ["node_modules"]
 }
