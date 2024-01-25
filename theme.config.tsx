@@ -3,6 +3,11 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 import { FacebookIcon } from "./components/icons";
 
 const config: DocsThemeConfig = {
+    useNextSeoProps() {
+        return {
+            titleTemplate: "%s - HUI",
+        };
+    },
     logo: <span>HUI Docs</span>,
     project: {
         link: "https://github.com/huypham00it",

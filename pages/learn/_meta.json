@@ -1,5 +1,8 @@
 {
     "javascript": {
         "title": "Javascript"
+    },
+    "frontend": {
+        "title": "Frontend"
     }
 }

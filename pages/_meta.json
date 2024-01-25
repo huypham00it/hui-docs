@@ -1,9 +1,6 @@
 {
     "index": {
-        "title": "Introduction",
-        "theme": {
-            "layout": "full"
-        }
+        "title": "Introduction"
     },
     "learn": {
         "title": "Learning"

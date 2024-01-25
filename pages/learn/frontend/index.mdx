@@ -1,0 +1,32 @@
+# Frontend Quizz
+
+## Quiz Questions
+
+import FAQBox from "@components/FAQBox";
+
+<FAQBox title="Sự khác nhau giữa `<script>`, `<script async>` và `<script defer>`">
+    Thẻ `<script>` được sử dụng để đưa JavaScript vào trang web. Các thuộc tính **async** và **defer** được sử dụng để thay đổi cách thức/thời điểm tải và thực thi tập lệnh.
+
+    ### `<script> đơn giản`
+    Đối với các thẻ `<script>` thông thường không sử dụng bất kỳ **async** hoặc **defer**, khi gặp phải chúng, quá trình phân tích cú pháp HTML sẽ bị chặn, tập lệnh sẽ được tìm nạp và thực thi ngay lập tức. Quá trình phân tích cú pháp HTML sẽ tiếp tục sau khi tập lệnh được thực thi.
+
+    ### `<script async>`
+    Trong `<script async>`, tập lệnh sẽ được tìm nạp song song với quá trình phân tích cú pháp HTML và được thực thi ngay khi có sẵn (có thể trước khi quá trình phân tích cú pháp HTML hoàn tất) và nó không nhất thiết phải được thực thi theo thứ tự xuất hiện trong tài liệu HTML. Sử dụng **async** khi tập lệnh độc lập với bất kỳ tập lệnh nào khác trên trang, ví dụ: analytics.
+
+    ### `<script defer>`
+    Trong `<script defer>`, tập lệnh sẽ được tìm nạp song song với phân tích cú pháp HTML và được thực thi khi tài liệu đã được phân tích cú pháp đầy đủ nhưng trước khi kích hoạt *DOMContentLoaded*. Nếu có nhiều tập lệnh trì hoãn thì mỗi tập lệnh trì hoãn sẽ được thực thi theo thứ tự chúng xuất hiện trong tài liệu HTML.
+
+    Nếu tập lệnh dựa trên DOM được phân tích cú pháp đầy đủ, thuộc tính defer sẽ hữu ích trong việc đảm bảo rằng HTML được phân tích cú pháp đầy đủ trước khi thực thi.
+
+    ### Lưu ý
+    -   Nói chung, thuộc tính async nên được sử dụng cho các tập lệnh không quan trọng đối với hiển thị ban đầu của trang và không phụ thuộc lẫn nhau, trong khi thuộc tính defer nên được sử dụng cho các tập lệnh phụ thuộc vào / bị phụ thuộc vào tập lệnh khác.
+
+    -   Thuộc tính async và defer bị bỏ qua đối với các tập lệnh không có thuộc tính src.
+
+    -   Các `<script>` có **defer** hoặc **async** chứa document.write() sẽ bị bỏ qua với thông báo như "A call to document.write() from an asynchronously-loaded external script was ignored".
+
+    ### Tham khảo
+    -   [`<script>`: The Script element | MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#defer)
+
+    -   [async vs defer attributes](https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)
+    </FAQBox>
