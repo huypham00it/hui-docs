@@ -13,5 +13,8 @@
         "title": "Contact ↗",
         "type": "page",
         "href": "mailto:huypv.dev@gmail.com"
+    },
+    "docker": {
+        "title": "Docker"
     }
 }

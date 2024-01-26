@@ -1,0 +1,70 @@
+# Sử dụng Docker
+
+## Kiểm tra hoạt động của Docker
+
+-   docker version
+-   docker info
+-   **Cú pháp chung:** docker `<command>` `<action-command>` [options]
+-   docker container ls
+-   docker container ls -a
+-   docker container stop
+
+## Container và Virtual Machine khác gì nhau?
+
+-   Container != mini Virtual Machine
+-   Container là Process chạy trên hệ điều hành
+
+    -   Process này được giới hạn tài nguyên sử dụng trên OS (file, network, CPU, mem…)
+    -   Container dừng và thoát như đóng process
+
+-   Một số câu lệnh kiểm tra
+    -   docker container run --name mongo -d mongo
+    -   docker top mongo
+    -   ps aux
+    -   docker container logs mongo
+
+## Image và Container khác gì nhau?
+
+-   Image là ứng dụng
+-   Container là process khi chạy ứng dụng đó
+-   Có thể có nhiều container chạy từ cùng một image
+-   Image được lưu trên một kho chung gọi là “registry”
+
+### Ví dụ:
+
+`docker container run --name nginxserver –-publish 8080:80 –d nginx`
+
+-   Kiểm tra xem image nginx có sẵn trên host chưa
+-   Nếu chưa có thì pull từ Docker Hub về
+-   Tạo container tên **nginxserver** dựa trên image nginx
+-   Cấp địa chỉ IP cho container
+-   Mở port 8080 trên host và NAT vào port 80 của container
+-   Chạy container với các lệnh được định nghĩa trong image
+
+### Thực hành
+
+`Chạy cùng lúc nhiều containers`
+-Chạy 3 container nginx, mysql và httpd
+
+-   Lưu ý detach và đặt tên cho từng container
+-   Cổng: nginx (80:80), httpd (8080:80), mysql (3306:3306)
+-   Với mysql, sử dụng ––env để thiết lập biến môi trường
+    MYSQL_RANDOM_ROOT_PASSWORD=yes , sau đó xem logs của mysql để tìm password
+    được sinh ra khi khởi chạy container
+-   Xóa hết container sau khi hoàn thành bài tập với lệnh stop và rm
+
+## Trong Container đang chạy những gì?
+
+-   docker container top - process list
+-   docker container inspect – xem file cấu hình của container
+-   docker container stats – performance
+
+## Vào shell của container
+
+-   `docker container run -it` – **chạy mới container và vào shell**
+    -   Container chạy bash mặc định (ubuntu, centos…)
+    -   Container chạy app (nginx, httpd, drupal…) thì cần thêm command `bash`
+-   `docker container exec -it` – **vào shell của container đang chạy**
+-   Phím tắt để thao tác với Container:
+    -   `Ctrl + C` **để thoát interactive terminal và thoát container**
+    -   `Ctrl + PQ` **để thoát interactive terminal**
