@@ -2,6 +2,9 @@
     "index": {
         "title": "Introduction"
     },
+    "docker": {
+        "title": "Docker"
+    },
     "learn": {
         "title": "Learning"
     },
@@ -13,8 +16,5 @@
         "title": "Contact ↗",
         "type": "page",
         "href": "mailto:huypv.dev@gmail.com"
-    },
-    "docker": {
-        "title": "Docker"
     }
 }
