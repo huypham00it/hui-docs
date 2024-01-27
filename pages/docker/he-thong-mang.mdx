@@ -1,0 +1,40 @@
+# Hệ thống mạng trong Docker
+
+-   Mỗi container kết nối với một mạng ảo dạng BRIDGE
+-   Mỗi mạng ảo sau đó được NAT ra IP của host OS
+-   Mỗi container được kết nối trực tiếp, ngang hang với nhau
+-   Có thể tạo virtual network riêng cho mỗi lớp ứng dụng
+
+## Command thường dùng
+
+-   Show networks `docker network ls`
+-   Kiểm tra cấu hình network `docker network inspect`
+-   Tạo network `docker network create -driver`
+-   Kết nối network vào container `docker network connect`
+-   Bỏ kết nối network vào container `docker network disconnect`
+
+import { Callout } from "nextra/components";
+
+<Callout>
+    - Container không nói chuyện với nhau bằng IP mà bằng tên (--name). DNS là
+    chức năng có sẵn của hệ thống khi container được tạo ra
+</Callout>
+
+### Bài tập
+
+#### 1: Tạo và chạy lệnh trong container
+
+-   Chạy 2 container là **centos:7** và **ubuntu:16.04** với kết nối vào shell
+-   Cài đặt curl cho 2 container này
+-   **ubuntu**: `apt-get update && apt-get install curl`
+-   **centos**:`yum update curl`
+-   Dùng cơ chế docker container run —rm để khi thoát sẽ tự xóa container
+
+#### 2: DNS Round robin
+
+-   2 containers có thể có cùng một DNS name bằng cách dùng `--network-alias`
+-   Tạo 2 container **elasticsearch:2**
+-   Đặt alias giống nhau cho 2 container này, ví dụ tên **search**
+-   Từ container centos ở Bài tập 1, chạy `curl -s search:9200` nhiều lần để thấy kết
+    quả DNS phân giải đến cả 2 container elasticsearch và trên centos nhận được
+    response từ cả 2 server

@@ -1,6 +1,9 @@
 {
-    "cai-dat-docker": "Cài đặt Docker",
-    "su-dung-docker": {
-        "title": "Sử dụng Docker"
+    "cai-dat": "Cài đặt",
+    "su-dung": {
+        "title": "Sử dụng"
+    },
+    "he-thong-mang": {
+        "title": "Hệ thống mạng"
     }
 }

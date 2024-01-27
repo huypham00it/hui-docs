@@ -68,3 +68,157 @@
 -   Phím tắt để thao tác với Container:
     -   `Ctrl + C` **để thoát interactive terminal và thoát container**
     -   `Ctrl + PQ` **để thoát interactive terminal**
+
+### command
+
+```shell copy
+docker version
+```
+
+```shell copy
+docker info
+```
+
+```shell copy
+docker
+```
+
+```shell copy
+docker container run
+```
+
+```shell copy
+docker run
+```
+
+#### Starting a Nginx Web Server
+
+```shell copy
+docker container run --publish 80:80 nginx
+```
+
+```shell copy
+docker container run --publish 80:80 --detach nginx
+```
+
+```shell copy
+docker container ls
+```
+
+```shell copy
+docker container ls -a
+```
+
+```shell copy
+docker container run --publish 80:80 --detach --name webhost nginx
+```
+
+```shell copy
+docker container logs webhost
+```
+
+```shell copy
+docker container top
+```
+
+```shell copy
+docker container top webhost
+```
+
+```shell copy
+docker container --help
+```
+
+```shell copy
+docker container rm 12f 145 av5
+```
+
+#### Container VS. VM: It's Just a Process
+
+```shell copy
+docker container run --name nginx2 -d nginx
+```
+
+```shell copy
+docker ps
+```
+
+```shell copy
+docker container top mysql
+```
+
+```shell copy
+docker container top nginx2
+```
+
+```shell copy
+docker container inspect mysql
+```
+
+```shell copy
+docker container stats --help
+```
+
+```shell copy
+docker container stats
+```
+
+```shell copy
+docker container ls
+```
+
+```shell copy
+docker container run -help
+```
+
+```shell copy
+docker container run -it --name proxy nginx bash
+```
+
+```shell copy
+docker container ls
+```
+
+```shell copy
+docker container ls -a
+```
+
+```shell copy
+docker container run -it --name ubuntu ubuntu
+```
+
+```shell copy
+docker container ls
+```
+
+```shell copy
+docker container ls -a
+```
+
+```shell copy
+docker container start -ai ubuntu
+```
+
+```shell copy
+docker container exec -it mysql bash
+```
+
+```shell copy
+docker container run -it alpine bash
+```
+
+```shell copy
+docker container run -it alpine sh
+```
+
+```shell copy
+docker container run -p 80:80 --name webhost -d nginx
+```
+
+```shell copy
+docker container port webhost
+```
+
+```shell copy
+docker network ls
+```
